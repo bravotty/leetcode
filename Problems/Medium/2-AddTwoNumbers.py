@@ -14,43 +14,46 @@ class Solution:
             return l2
         if l2 == None:
             return l1
-        # ini----
+        # initialization
         result = ListNode(0)
         p = result
-        flag = 0
+        carry = 0
         # same add
         while l1 and l2:
-            sum = l1.val + l2.val + flag
-            # 
-            flag = 0
+            sum = l1.val + l2.val + carry
+            # carry flag
+            carry = 0
             if sum >= 10:
                 sum -= 10
-                flag = 1
+                carry = 1
             p.next = ListNode(sum)
             l1 = l1.next
             l2 = l2.next
             p = p.next
+        # l1 more than l2 length
         if l1:
             while l1:
-                sum = l1.val + flag
-                flag = 0
+                sum = l1.val + carry
+                carry = 0
                 if sum >= 10:
                     sum -= 10
-                    flag = 1
+                    carry = 1
                 p.next = ListNode(sum)
                 l1 = l1.next
                 p = p.next
+        # l2 more than l1 length
         if l2:
             while l2:
-                sum = l2.val + flag
-                flag = 0
+                sum = l2.val + carry
+                carry = 0
                 if sum >= 10:
                     sum -= 10
-                    flag = 1
+                    carry = 1
                 p.next = ListNode(sum)
                 l2 = l2.next
                 p = p.next
-        if flag:
-            p.next = ListNode(flag)
+        # clean the carry
+        if carry:
+            p.next = ListNode(carry)
             p = p.next
         return result.next
